@@ -51,7 +51,7 @@ export default function Home() {
       <h1 class="text-3xl font-bold text-center mb-8 text-orange-500">Prenota il tuo volo con AVPS</h1>
       <div class="w-full max-w-5xl flex flex-col md:flex-row gap-8 md:gap-12 md:p-8">
         {/* Event Info */}
-        <section class="flex-1 md:max-w-md bg-sky-100/80 rounded-xl p-6 md:p-8 flex flex-col justify-center mb-4 md:mb-0">
+        <section class="flex-1 md:max-w-md bg-sky-100/80 rounded-xl p-6 md:p-8 flex flex-col justify-start mb-4 md:mb-0 md:self-stretch">
           <h2 class="text-2xl font-bold text-orange-500 mb-4">Dettagli Evento</h2>
           <ul class="space-y-2 text-base text-gray-800">
             <li><span class="font-semibold text-orange-400">Data:</span> Domenica 8 giugno 2025</li>
@@ -102,6 +102,9 @@ export default function Home() {
             <p class="mt-4 text-red-600 font-medium">{submission.result?.error}</p>
           </Show>
           <button type="submit" class="mt-6 w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-2 rounded transition-colors"><Show when={submission.pending} fallback={<span>Prenota ora</span>}><span>Caricamento...</span></Show></button>
+          <Show when={submission.result && submission.result.success}>
+            <p class="mt-4 text-green-600 font-medium">{submission.result?.message}</p>
+          </Show>
         </form>
       </div>
     </main>
