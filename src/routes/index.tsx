@@ -1,10 +1,10 @@
-import { action, useAction, useSubmission } from "@solidjs/router";
-import { createSignal, Show } from "solid-js";
+import { action, useSubmission } from "@solidjs/router";
+import { Show } from "solid-js";
 import { createStore } from "solid-js/store";
 import { model } from "../directives/bind";
 import { db } from '../db';
 import { bookings } from '../schema';
-import { eq } from 'drizzle-orm';
+import { sendEmail } from "@netlify/emails";
 
 const createBooking = action(async (formData: FormData) => {
   "use server";
@@ -30,6 +30,7 @@ const createBooking = action(async (formData: FormData) => {
     };
   }
 
+  let reverteBooking = false;
   // Store booking in DB
   try {
     await db.insert(bookings).values({
@@ -40,7 +41,24 @@ const createBooking = action(async (formData: FormData) => {
       adults,
       children,
     });
+    reverteBooking = true;
+    await sendEmail({
+      from: `${firstName} ${lastName} <${email}>`,
+      to: `${process.env.CONTACT_EMAIL}`,
+      subject: `Nuova prenotazione da ${firstName} ${lastName}`,
+      template: "booking",
+      parameters: {
+        firstName,
+        lastName,
+        email,
+        phone,
+        adults,
+        children,
+      },
+    })
+    console.log(`Prenotazione ricevuta per ${firstName} ${lastName}, conferma inviata a ${process.env.CONTACT_EMAIL}.`);
   } catch (e) {
+    console.error("Errore durante il salvataggio della prenotazione:", e);
     return {
       success: false,
       error: 'Errore durante il salvataggio della prenotazione.',
@@ -49,7 +67,7 @@ const createBooking = action(async (formData: FormData) => {
 
   return {
     success: true,
-    message: `Prenotazione ricevuta per ${firstName} ${lastName}. Conferma inviata a ${email}.`,
+    message: `Prenotazione ricevuta per ${firstName} ${lastName}. Attendi la conferma via email (visto l'elevato numero di prenotazioni, potrebbe richiedere qualche giorno).`,
   };
 });
 
