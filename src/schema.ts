@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 export const bookings = sqliteTable('bookings', {
@@ -8,5 +9,5 @@ export const bookings = sqliteTable('bookings', {
   phone: text('phone').notNull(),
   adults: integer('adults').notNull(),
   children: integer('children').notNull(),
-  createdAt: text('created_at').notNull().default("(datetime('now'))"),
+  createdAt: text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`),
 });
