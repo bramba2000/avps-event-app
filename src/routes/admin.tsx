@@ -1,11 +1,24 @@
 import { ErrorBoundary, For, Show } from "solid-js";
 import { db } from "../db";
 import { bookings } from "../schema";
-import { createAsync, query, RouteDefinition, action } from "@solidjs/router";
+import { createAsync, query, RouteDefinition, action, redirect } from "@solidjs/router";
 import { eq } from "drizzle-orm";
+import { getSession, useSession } from "vinxi/http";
+
+type SessionData = {
+    name: string;
+}
 
 const getBookings = query(async () => {
     "use server";
+    const session = await getSession<SessionData>(
+        {
+            password: process.env.SESSION_SECRET!,
+        }
+    );
+    if (!session || !session.data.name) {
+        throw redirect("/admin");
+    }
     
     try {
         const result = await db.select().from(bookings);
@@ -32,7 +45,7 @@ export const route = {
 } satisfies RouteDefinition;
 
 export default function AdminDashboard() {
-  const bookings = createAsync(() => getBookings())
+  const bookings = createAsync(() => getBookings());
 
   return (
     <main class="min-h-screen flex flex-col items-center bg-white/80 py-8 px-2">
