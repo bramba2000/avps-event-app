@@ -27,4 +27,8 @@ gitignore
 .DS_Store
 Thumbs.db
 
+# Drizzle
+*.sqlite
+migrations/meta
+
 .dev.vars*

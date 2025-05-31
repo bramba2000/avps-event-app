@@ -7,17 +7,25 @@
 		"start": "vinxi start",
 		"preview": "npm run build && npx wrangler dev",
 		"deploy": "npm run build && wrangler deploy",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"drizzle:generate": "drizzle-kit generate",
+		"drizzle:push": "drizzle-kit push",
+		"drizzle:deploy": "drizzle-kit deploy",
+		"drizzle:studio": "drizzle-kit studio"
 	},
 	"dependencies": {
+		"@libsql/client": "^0.15.8",
+		"@netlify/emails": "^1.1.0",
 		"@solidjs/router": "^0.15.0",
 		"@solidjs/start": "^1.1.0",
+		"drizzle-orm": "^0.44.1",
 		"solid-js": "^1.9.5",
 		"vinxi": "^0.5.3"
 	},
 	"devDependencies": {
 		"@tailwindcss/vite": "^4.0.7",
 		"@types/node": "^22.15.27",
+		"drizzle-kit": "^0.31.1",
 		"nitropack": "^2.11.12",
 		"tailwindcss": "^4.0.7",
 		"wrangler": "^4.18.0"

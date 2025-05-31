@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nuova prenotazione</h1>
+        <p>Ciao, </p>
+        <p>Ti informiamo che &egrave; stata ricevuta una nuova prenotazione a nome di:</p>
+        <ul>
+            <li><strong>Nome:</strong> {{ firstName }}</li>
+            <li><strong>Cognome:</strong> {{ lastName }}</li>
+            <li><strong>Email:</strong> {{ email }}</li>
+            <li><strong>Telefono:</strong> {{ phone }}</li>
+            <li><strong>Adulti</strong> {{ adults }}</li>
+            <li><strong>Bambini:</strong> {{ children }}</li>
+        </ul>
+        <button><a href="mailto:{{email}}">Clicca qui per creare un email di conferma</a></button>
+    </div>
+</body>
+</html>
