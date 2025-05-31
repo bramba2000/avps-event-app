@@ -7,7 +7,7 @@ export default defineConfig({
   },
 
   server: {
-    preset: "cloudflare_module",
+    preset: "netlify",
     compatibilityDate: "2025-05-29"
   }
 });
