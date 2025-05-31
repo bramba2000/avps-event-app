@@ -2,6 +2,9 @@ import { action, useAction, useSubmission } from "@solidjs/router";
 import { createSignal, Show } from "solid-js";
 import { createStore } from "solid-js/store";
 import { model } from "../directives/bind";
+import { db } from '../db';
+import { bookings } from '../schema';
+import { eq } from 'drizzle-orm';
 
 const createBooking = action(async (formData: FormData) => {
   "use server";
@@ -24,6 +27,23 @@ const createBooking = action(async (formData: FormData) => {
     return {
       success: false,
       error: "Deve esserci almeno un adulto ogni due bambini",
+    };
+  }
+
+  // Store booking in DB
+  try {
+    await db.insert(bookings).values({
+      firstName,
+      lastName,
+      email,
+      phone,
+      adults,
+      children,
+    });
+  } catch (e) {
+    return {
+      success: false,
+      error: 'Errore durante il salvataggio della prenotazione.',
     };
   }
 
