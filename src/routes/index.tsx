@@ -122,15 +122,16 @@ export default function Home() {
             </li>
             <li>
               <span class="font-semibold text-orange-400">Capienza:</span> 80
-              posti totali, 5 persone (di cui al massimo un bambino sotto i 14
-              anni) per fascia oraria
+              posti totali, 5 persone (di cui al massimo un bambino) per fascia
+              oraria
             </li>
           </ul>
           <p class="mt-4 text-orange-400 bg-amber-100 rounded px-3 py-2 font-medium text-sm">
             <span class="font-bold">Attenzione:</span> il volo{" "}
-            <span class="font-bold">NON</span> è permesso a persone con disabilità
-            fisiche, protesi o gessi o a persone con ridotta mobilità, a persone
-            in stato di gravidanza e ai bambini al di sotto dei 5 anni di età.
+            <span class="font-bold">NON</span> è permesso a persone con
+            disabilità fisiche, protesi o gessi o a persone con ridotta
+            mobilità, a persone in stato di gravidanza e ai bambini al di sotto
+            dei 5 anni di età.
           </p>
           <h3 class="text-lg font-semibold text-orange-500 mt-6 mb-2">
             Come arrivare
