@@ -7,7 +7,7 @@ export default defineConfig({
   },
 
   server: {
-    preset: "netlify",
+    preset: "netlify-edge",
     compatibilityDate: "2025-05-29"
   }
 });
