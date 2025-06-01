@@ -43,7 +43,7 @@ const createBooking = action(async (formData: FormData) => {
     });
     reverteBooking = true;
     await sendEmail({
-      from: `${firstName} ${lastName} <${email}>`,
+      from: `matteo.brambilla@avps.it`,
       to: `${process.env.CONTACT_EMAIL}`,
       subject: `Nuova prenotazione da ${firstName} ${lastName}`,
       template: "booking",
